@@ -25,12 +25,12 @@ Sistema de Telemetría Multicloud y Observabilidad Asíncrona
         ```bash
         cd ruta/de/la/carpeta
         ```
-    2. Clona el repositorio
+    2. Clona el repositorio:
         
         ```bash
         git clone git@github.com:leoventicola/TP1-Triton-project.git
         ```
-    3. Entra al proyecto
+    3. Entra al proyecto:
         
         ```bash
         cd TP1-Triton-project
@@ -42,45 +42,53 @@ Sistema de Telemetría Multicloud y Observabilidad Asíncrona
 
         Dentro de la carpeta del proyecto:
         
-        ```bash
-        python -m venv venv
-        ```
+        - Windows:
+
+          ```bash
+          python -m venv .venv
+          ```
         
-        Esto crea una carpeta llamada `venv`.
+        - Linux / macOS:
+
+          ```bash
+          python3 -m venv .venv
+          ```
+        
+        Esto crea una carpeta llamada `.venv`.
     
     2. Activarlo
 
         - Windows (CMD):
         
-        ```bash
-        venv\Scripts\activate
-        ```
+          ```bash
+          venv\Scripts\activate
+          ```
 
         - Windows (PowerShell):
 
-        ```bash
-        .\venv\Scripts\Activate.ps1
-        ```
+          ```bash
+          .\venv\Scripts\Activate.ps1
+          ```
 
         - Linux / macOS:
             
-        ```bash
-        source .venv/bin/activate
-        ```
+          ```bash
+          source .venv/bin/activate
+          ```
+        
+          Cuando esté activado, normalmente verás algo como:
 
-        Cuando esté activado, normalmente verás algo como:
-
-        ```bash
-        (.venv) $
-        ```
+            ```bash
+            (.venv) $
+            ```
 
     3. Instalar paquetes:
     
         Con el entorno activado:
 
-        ```bash
-        pip install -r requirements.txt
-        ```
+          ```bash
+          pip install -r requirements.txt
+          ```
 
 [3. Configurar las variables de entorno]: #
 
