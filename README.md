@@ -65,13 +65,13 @@ Sistema de Telemetría Multicloud y Observabilidad Asíncrona
         - Linux / macOS:
             
         ```bash
-        source venv/bin/activate
+        source .venv/bin/activate
         ```
 
         Cuando esté activado, normalmente verás algo como:
 
         ```bash
-        (venv) C:\mi-proyecto>
+        (.venv) $
         ```
 
     3. Instalar paquetes:
