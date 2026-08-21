@@ -61,7 +61,7 @@ Sistema de Telemetría Multicloud y Observabilidad Asíncrona
         - Windows (CMD):
         
           ```bash
-          venv\Scripts\activate
+          .venv\Scripts\activate
           ```
 
         - Windows (PowerShell):
@@ -89,6 +89,15 @@ Sistema de Telemetría Multicloud y Observabilidad Asíncrona
           ```bash
           pip install -r requirements.txt
           ```
+
+    4. Instalar el paquete `trinton_telemetry` (Opcional para realizar tests)
+
+        Para ejecutar los tests ubicados en tests/, instalar el paquete en modo editable:
+      
+          ```bash
+          pip install -e .
+          ```
+
 
 [3. Configurar las variables de entorno]: #
 
