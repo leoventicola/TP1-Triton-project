@@ -67,7 +67,7 @@ Sistema de Telemetría Multicloud y Observabilidad Asíncrona
         - Windows (PowerShell):
 
           ```bash
-          .\venv\Scripts\Activate.ps1
+          .\.venv\Scripts\Activate.ps1
           ```
 
         - Linux / macOS:
