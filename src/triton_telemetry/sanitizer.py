@@ -4,18 +4,18 @@ import re
 def parse_timeout(value: str) -> float:
     """
     Valida entradas de timeout
-    para salidas HTTP.
+    para solicitudes HTTP.
     Soporta flotantes de 0.1 a 5.0.
     """
     try:
         val = float(value)
         if not (0.1 <= val <= 5.0):
-            raise argparse.ArgumentTypeError(f"Timeout invalido, solo se permiten flotantes entre 0.1 y 5.0")
+            raise argparse.ArgumentTypeError(f"Timeout invalido, solo se permiten valores entre 0.1 y 5.0 segundos")
         return val
     except ValueError:
         raise argparse.ArgumentTypeError(
             f"Timeout invalido -{value}-\n"
-            "Solo se permiten numeros decimales entre 0.1 y 5.0"
+            "Solo se permiten valores numericos entre 0.1 y 5.0 segundos"
         )
 
 def parse_cluster_id(value:str) -> str:

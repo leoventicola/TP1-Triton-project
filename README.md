@@ -14,7 +14,7 @@ Sistema de Telemetría Multicloud y Observabilidad Asíncrona
 
 ### Requisitos
 
-- Python 3.0+
+- Python 3.14+
 
 ## Instalación
 
@@ -61,7 +61,7 @@ Sistema de Telemetría Multicloud y Observabilidad Asíncrona
         - Windows (CMD):
         
           ```bash
-          venv\Scripts\activate
+          .venv\Scripts\activate
           ```
 
         - Windows (PowerShell):
@@ -87,7 +87,7 @@ Sistema de Telemetría Multicloud y Observabilidad Asíncrona
         Con el entorno activado:
 
           ```bash
-          pip install -r requirements.txt
+          python -m pip install -r requirements.txt
           ```
 
 [3. Configurar las variables de entorno]: #
