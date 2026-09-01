@@ -4,17 +4,19 @@ Sistema de Telemetría Multicloud y Observabilidad Asíncrona
 
 ### Características
 
-- Consulta estados de los clúster en tiempo real
-- Muestreo de datos legible al humano
+- Consulta estados de los clústeres en tiempo real.
+- Muestreo de datos legible para el humano.
+- Ejecución asíncrona mediante asyncio.
 
 ### Tecnologías
 
 - Python
 - pip
+- asyncio
 
 ### Requisitos
 
-- Python 3.0+
+- Python 3.11 o superior
 
 ## Instalación
 
@@ -90,22 +92,46 @@ Sistema de Telemetría Multicloud y Observabilidad Asíncrona
           pip install -r requirements.txt
           ```
 
-    4. Instalar el paquete `trinton_telemetry` (Opcional para realizar tests)
+[# Cómo Usar]:#
 
-        Para ejecutar los tests ubicados en tests/, instalar el paquete en modo editable:
+---
+## Tests
+
+Instalar el paquete `trinton_telemetry` (Opcional para realizar tests)
+
+Para ejecutar los tests ubicados en `tests/`, instalar el paquete en modo editable:
       
-          ```bash
-          pip install -e .
-          ```
-
-
-[3. Configurar las variables de entorno]: #
+```bash
+pip install -e .
+```
 
 [4. Ejecutar el proyecto]: #
 
-[## Configuración]: #
+## Configuración VS CODE
 
-[## Uso]: #
+Se recomienda utilizar Visual Studio Code como editor y seleccionar el intérprete de Python correspondiente al entorno virtual del proyecto.
+
+1. Abrir la **Paleta de comandos**
+
+      **Ver → Paleta de comandos**.
+
+2. Seleccionar:
+
+        >Python: Select Interpreter
+
+3. Seleccionar el intérprete del entorno virtual:
+    
+    - Windows:
+        ```bash
+        .venv\Scripts\python.exe
+        ```
+
+    - Linux/macOS:
+
+        ```bash
+        .venv/bin/python
+        ```
+  Aclaración: El repositorio incluye un archivo settings.json con la configuración recomendada para el entorno de desarrollo en VS Code.
 
 ---
 # Equipo de desarrollo
