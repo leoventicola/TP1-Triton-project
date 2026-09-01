@@ -111,8 +111,7 @@ async def query_provider_telemetry(
         except httpx.RequestError as err:
             # Caída física o de red genérica (offline, dns fallido, etc.)
             n_err = NetworkPeeringError(
-                "Error crítico de transporte de red "
-                f"al intentar alcanzar {provider}."
+                f"Error crítico de transporte de red al intentar alcanzar {provider}."
             )
             n_err.add_note(f"Provider_ID: {provider}")
             n_err.add_note(f"Network_Error_Type: {type(err).__name__}")
