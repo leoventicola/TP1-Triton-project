@@ -95,45 +95,18 @@ Sistema de Telemetría Multicloud y Observabilidad Asíncrona
 [# Cómo Usar]:#
 
 ---
-## Tests
 
-Instalar el paquete `trinton_telemetry` (Opcional para realizar tests)
+## Calidad y pruebas
 
-Para ejecutar los tests ubicados en `tests/`, instalar el paquete en modo editable:
-      
-```bash
-pip install -e .
-```
+El proyecto cuenta con pruebas automatizadas y herramientas de análisis estático
+(Flake8 y Pylint) para verificar su correcto funcionamiento y mantener la
+calidad del código.
 
-[4. Ejecutar el proyecto]: #
-
-## Configuración VS CODE
-
-Se recomienda utilizar Visual Studio Code como editor y seleccionar el intérprete de Python correspondiente al entorno virtual del proyecto.
-
-1. Abrir la **Paleta de comandos**
-
-      **Ver → Paleta de comandos**.
-
-2. Seleccionar:
-
-        >Python: Select Interpreter
-
-3. Seleccionar el intérprete del entorno virtual:
-    
-    - Windows:
-        ```bash
-        .venv\Scripts\python.exe
-        ```
-
-    - Linux/macOS:
-
-        ```bash
-        .venv/bin/python
-        ```
-  Aclaración: El repositorio incluye un archivo settings.json con la configuración recomendada para el entorno de desarrollo en VS Code.
+Para conocer cómo ejecutar las pruebas y las herramientas de análisis,
+consultar [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ---
+
 # Equipo de desarrollo
 
 #### Equipo 404
