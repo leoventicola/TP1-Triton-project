@@ -5,14 +5,14 @@ import asyncio
 import traceback
 
 from triton_telemetry import (
-    CorruptedPayloadError, 
-    NetworkPeeringError, 
+    CorruptedPayloadError,
+    NetworkPeeringError,
     ProviderTimeoutError,
     TritonError,
     parse_cluster_id,
     parse_timeout,
     scan_all_providers,
-    setup_triton_logging    
+    setup_triton_logging
 )
 
 # Constantes del dominio (PEP 8 : MAYUS)
@@ -35,8 +35,7 @@ def build_cli_parser() -> argparse.ArgumentParser:
         nargs="+",
         choices=PROVIDERS,
         metavar="PROVIDER",
-        help=("Proveedores que se deben monitorear: AWS, Azure o GCP. "
-        ),
+        help=("Proveedores que se deben monitorear: AWS, Azure o GCP. "),
     )
 
     # ID del clúster con sanitizador
@@ -50,7 +49,7 @@ def build_cli_parser() -> argparse.ArgumentParser:
             "Identificador del clúster. "
             "Ejemplo: cluster-us-east-01. "
         ),
-        
+
     )
 
     # IMEOUT con sanitizador
@@ -70,8 +69,7 @@ def build_cli_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--chaos",
         action="store_true",
-        help=("Activa los endpoints destinados a probar fallos de red.",
-        ),
+        help=("Activa los endpoints destinados a probar fallos de red.",),
     )
 
     # Modos operativos
@@ -91,14 +89,12 @@ def build_cli_parser() -> argparse.ArgumentParser:
     output_group.add_argument(
         "--quiet",
         action="store_true",
-        help=("Muestra únicamente resultados y anomalías importantes.",
-        ),
+        help=("Muestra únicamente resultados y anomalías importantes.",),
     )
     output_group.add_argument(
         "--verbose",
         action="store_true",
-        help=("Muestra información detallada de la operación.",
-        ),
+        help=("Muestra información detallada de la operación.",),
     )
 
     return parser
@@ -106,6 +102,7 @@ def build_cli_parser() -> argparse.ArgumentParser:
 
 # Registro forense estructurado de excepciones
 def log_forensic_exception(logger, exc):
+    """Registra una excepción con información forense estructurada."""
     logger.error(
         "Registro forense estructurado de la excepción",
         extra={
@@ -126,10 +123,10 @@ def log_forensic_exception(logger, exc):
 
 
 async def async_main() -> None:
+    """Inicialización de logging dinámico"""
     parser = build_cli_parser()
     args = parser.parse_args()
 
-    # Inicialización de logging dinámico
     logger = setup_triton_logging()
 
     logger.info("=" * 60)
@@ -151,7 +148,7 @@ async def async_main() -> None:
                 r["latency_sec"],
                 r["payload_id"],
                 r["status"],
-            )     
+            )
 
     except* ProviderTimeoutError as group:
         logger.error(
@@ -165,10 +162,9 @@ async def async_main() -> None:
 
             log_forensic_exception(logger, exc)
 
-
     except* NetworkPeeringError as group:
         logger.error(
-            "\n ANOMALÍA: DETECTADOS FALLOS FÍSICOS DE CONEXIÓN (%d incidentes):",
+            "\n ANOMALÍA: DETEC. FALLOS FÍSICOS DE CONEXIÓN (%d incidentes):",
             len(group.exceptions),
         )
         for exc in group.exceptions:
@@ -198,10 +194,9 @@ async def async_main() -> None:
         log_forensic_exception(logger, exc)
 
     finally:
-        # PEP 765: Limpieza sin return, break o continue
-        logger.info("\n" + "=" * 64)
-        logger.info("  [FIN DE CICLO] Recursos liberados de la Operación Tritón.")
-        logger.info("=" * 64)
+        logger.info("\n%s", "=" * 64)
+        logger.info("[FIN DE CICLO] Recursos liberados de Operación Tritón.")
+        logger.info("%s", "=" * 64)
 
         if hasattr(logger, "listener") and logger.listener:
             logger.listener.stop()
