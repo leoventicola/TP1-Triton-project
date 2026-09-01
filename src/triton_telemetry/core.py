@@ -24,16 +24,17 @@ PROVIDER_ENDPOINTS = {
 
 # Endpoints especiales para inyección de Caos real (vía HttpBin)
 CHAOS_ENDPOINTS = {
-    "TIMEOUT_TRIGGER": "https://httpbin.org/delay/3",    # Provoca retardo real de 3 segundos
-    "BAD_GATEWAY_TRIGGER": "https://httpbin.org/status/504", # Provoca código real 504
-    "CORRUPTED_TRIGGER": "https://httpbin.org/xml"       # Provoca datos XML cuando esperamos JSON
+    "TIMEOUT_TRIGGER": "https://httpbin.org/delay/3",               # Provoca retardo real de 3 segundos
+    "BAD_GATEWAY_TRIGGER": "https://httpbin.org/status/504",        # Provoca código real 504
+    "CORRUPTED_TRIGGER": "https://httpbin.org/xml"                  # Provoca datos XML cuando esperamos JSON
 }
 
+
 async def query_provider_telemetry(
-        provider: str,
-        timeout: float,
-        use_chaos: bool = False
-    ) -> Dict[str, Any]:
+            provider: str,
+            timeout: float,
+            use_chaos: bool = False
+        ) -> Dict[str, Any]:
 
     """
     Consulta la API de telemetría del proveedor de forma asíncrona usando httpx.
@@ -50,7 +51,8 @@ async def query_provider_telemetry(
     else:
         url = PROVIDER_ENDPOINTS.get(provider, "https://jsonplaceholder.typicode.com/posts/1")
 
-    logger.debug("Petición asíncrona iniciada hacia %s en URL: %s",
+    logger.debug(
+        "Petición asíncrona iniciada hacia %s en URL: %s",
         provider,
         url,
         extra={"provider": provider}
@@ -88,8 +90,10 @@ async def query_provider_telemetry(
 
         except httpx.TimeoutException as err:
             # Capturar timeouts nativos y relanzar semánticos agregándole notas de contexto
-            p_err = ProviderTimeoutError(f"Se agotó el tiempo de espera ({timeout}s) "
-                "al conectar con {provider}.")
+            p_err = ProviderTimeoutError(
+                f"Se agotó el tiempo de espera ({timeout}s) "
+                f"al conectar con {provider}."
+            )
             p_err.add_note(f"Provider_ID: {provider}")
             p_err.add_note(f"Requested_Timeout_Limit: {timeout}s")
             p_err.add_note(f"Target_Endpoint: {url}")
@@ -97,29 +101,34 @@ async def query_provider_telemetry(
 
         except httpx.HTTPStatusError as err:
             # Capturar respuestas erróneas de servidor y relanzar con metadatos
-            n_err = NetworkPeeringError(f"Fallo de conexión o denegación de ruteo de {provider}. "
-            "Estatus HTTP: {err.response.status_code}.")
+            n_err = NetworkPeeringError(
+                f"Fallo de conexión o denegación de ruteo de {provider}. "
+                f"Estatus HTTP: {err.response.status_code}.")
             n_err.add_note(f"Provider_ID: {provider}")
             n_err.add_note(f"HTTP_Status_Code: {err.response.status_code}")
             raise n_err from err
 
         except httpx.RequestError as err:
             # Caída física o de red genérica (offline, dns fallido, etc.)
-            n_err = NetworkPeeringError("Error crítico de transporte de red "
-                f"al intentar alcanzar {provider}.")
+            n_err = NetworkPeeringError(
+                "Error crítico de transporte de red "
+                f"al intentar alcanzar {provider}."
+            )
             n_err.add_note(f"Provider_ID: {provider}")
             n_err.add_note(f"Network_Error_Type: {type(err).__name__}")
             raise n_err from err
 
+
 async def scan_all_providers(
-        providers: list[str],
-        timeout: float,
-        use_chaos: bool = False
-    ) -> list[Dict[str, Any]]:
+    providers: list[str],
+    timeout: float,
+    use_chaos: bool = False
+) -> list[Dict[str, Any]]:
     """
     Orquesta las llamadas paralelas utilizando la estructura asyncio.TaskGroup.
     Todas las excepciones arrojadas por las tareas se agruparán en un ExceptionGroup nativo.
     """
+
     tasks = []
     results = []
 
