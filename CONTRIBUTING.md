@@ -1,7 +1,7 @@
 ## Entorno de desarrollo
 
-Antes de comenzar, seguí las instrucciones de instalación y configuración
-indicadas en el [README.md](README.md).
+Antes de comenzar, seguí las instrucciones de instalación
+y configuración indicadas en el [README.md](README.md).
 
 Una vez configurado el entorno, podés ejecutar las pruebas y herramientas
 de calidad descritas a continuación.
