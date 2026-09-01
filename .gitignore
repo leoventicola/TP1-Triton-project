@@ -4,5 +4,6 @@ __pycache__/
 *.pyc
 .env
 *.egg-info/
-.vscode/
+.vscode/*
+!.vscode/settings.json
 *.log
