@@ -1,6 +1,7 @@
 import argparse
 import re
 
+
 def parse_timeout(value: str) -> float:
     """
     Valida entradas de timeout
@@ -10,7 +11,9 @@ def parse_timeout(value: str) -> float:
     try:
         val = float(value)
         if not (0.1 <= val <= 5.0):
-            raise argparse.ArgumentTypeError(f"Timeout invalido, solo se permiten flotantes entre 0.1 y 5.0")
+            raise argparse.ArgumentTypeError(
+                "Timeout invalido, solo se permiten flotantes entre 0.1 y 5.0"
+            )
         return val
     except ValueError:
         raise argparse.ArgumentTypeError(
@@ -18,10 +21,11 @@ def parse_timeout(value: str) -> float:
             "Solo se permiten numeros decimales entre 0.1 y 5.0"
         )
 
-def parse_cluster_id(value:str) -> str:
+
+def parse_cluster_id(value: str) -> str:
     """
     Valida que el cluster siga la norma:
-    cluster-[a-z]{2,10}-[a-z]+-\d{2} (e.g., cluster-us-east-01).
+    cluster-[a-z]{2,10}-[a-z]+-\\d{2} (e.g., cluster-us-east-01).
     """
     pattern = r"^cluster-[a-z]{2,10}-[a-z]+-\d{2}$"
     if re.match(pattern, value):
