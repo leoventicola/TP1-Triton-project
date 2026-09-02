@@ -1,36 +1,152 @@
 import subprocess
 import sys
+import os
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
-# la ruta del script principal
-ruta_cli = "src/app_operator.py"
 
-# aca van los casos de prueba, cada uno con sus argumentos
+# Ruta del proyecto y del script principal
+directorio_proyecto = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ruta_cli = os.path.join(directorio_proyecto, "src", "app_operator.py")
+
+
+# Casos de prueba
 casos = [
-    ["AWS", "GCP", "-c", "cluster-us-east-01", "-t", "3.0"],   # caso normal
-    ["AWS", "Azure", "-c", "cluster-us-east-01", "-t", "0.1"], # timeout muy bajo
-    ["AWS", "-c", "cluster-mal-escrito", "-t", "3.0"],         # cluster invalido
-    ["AWS", "-c", "cluster-us-east-01", "-t", "9.5"],          # timeout fuera de rango
-    ["AWS", "Azure", "GCP", "-c", "cluster-us-west-02", "-t", "1.5", "--chaos"],  # modo caos
+    {
+        "nombre": "Operacion normal",
+        "args": [
+            "AWS", "GCP",
+            "-c", "cluster-us-east-01",
+            "-t", "3.0"
+        ],
+        "codigo_esperado": 0
+    },
+    {
+        "nombre": "Timeout muy bajo",
+        "args": [
+            "AWS", "Azure",
+            "-c", "cluster-us-east-01",
+            "-t", "0.1"
+        ],
+        "codigo_esperado": 0
+    },
+    {
+        "nombre": "Cluster invalido",
+        "args": [
+            "AWS",
+            "-c", "cluster-mal-escrito",
+            "-t", "3.0"
+        ],
+        "codigo_esperado": 2
+    },
+    {
+        "nombre": "Timeout fuera de rango",
+        "args": [
+            "AWS",
+            "-c", "cluster-us-east-01",
+            "-t", "9.5"
+        ],
+        "codigo_esperado": 2
+    },
+    {
+        "nombre": "Modo caos",
+        "args": [
+            "AWS", "Azure", "GCP",
+            "-c", "cluster-us-west-02",
+            "-t", "1.5",
+            "--chaos"
+        ],
+        "codigo_esperado": 0
+    }
 ]
 
-print("="*50)
+
+def ejecutar_prueba(caso):
+    """
+    Ejecuta una prueba del CLI y devuelve su resultado.
+    """
+    comando = [sys.executable, ruta_cli] + caso["args"]
+
+    try:
+        proceso = subprocess.run(
+            comando,
+            capture_output=True,
+            text=True,
+            cwd=directorio_proyecto
+        )
+
+        return {
+            "nombre": caso["nombre"],
+            "codigo_esperado": caso["codigo_esperado"],
+            "returncode": proceso.returncode,
+            "stdout": proceso.stdout,
+            "stderr": proceso.stderr
+        }
+
+    except OSError as error:
+        return {
+            "nombre": caso["nombre"],
+            "codigo_esperado": caso["codigo_esperado"],
+            "returncode": None,
+            "stdout": "",
+            "stderr": str(error)
+        }
+
+
+print("=" * 50)
 print("INICIANDO SIMULACION DE CAOS")
-print("="*50)
+print("=" * 50)
 
-for i, args in enumerate(casos, 1):
-    comando = [sys.executable, ruta_cli] + args
-    print("\nPrueba", i, ":", " ".join(comando))
-    
-    # ejecutar el comando y esperar
-    proceso = subprocess.run(comando, capture_output=True, text=True)
-    
-    if proceso.returncode == 0:
-        print("   Salió bien (codigo 0)")
-    else:
-        print("   Salió mal (codigo", proceso.returncode, ")")
-        # mostramos solo un pedacito del error para no llenar la pantalla
-        if proceso.stderr:
-            print("   Error:", proceso.stderr[:150])
 
-print("\nSimulacion de caos terminada.")
-print("Revisa los archivos triton_services.log y los .gz que se generaron.")
+resultados = []
+
+
+# Ejecutar las pruebas de forma concurrente
+with ThreadPoolExecutor(max_workers=len(casos)) as executor:
+
+    trabajos = [
+        executor.submit(ejecutar_prueba, caso)
+        for caso in casos
+    ]
+
+    for trabajo in as_completed(trabajos):
+        resultado = trabajo.result()
+        resultados.append(resultado)
+
+        print("\nPrueba:", resultado["nombre"])
+        print("   Codigo esperado:", resultado["codigo_esperado"])
+        print("   Codigo obtenido:", resultado["returncode"])
+
+        # Comparar el resultado real con el esperado
+        if resultado["returncode"] == resultado["codigo_esperado"]:
+            print("   Resultado: OK")
+        else:
+            print("   Resultado: ERROR")
+
+            if resultado["stderr"]:
+                print(
+                    "   Error:",
+                    resultado["stderr"][:150].replace("\n", " ")
+                )
+
+
+# Resumen final
+total_pruebas = len(resultados)
+
+pruebas_ok = sum(
+    1
+    for resultado in resultados
+    if resultado["returncode"] == resultado["codigo_esperado"]
+)
+
+pruebas_error = total_pruebas - pruebas_ok
+
+
+print("\n" + "=" * 50)
+print("RESUMEN")
+print("=" * 50)
+print("Pruebas ejecutadas:", total_pruebas)
+print("Pruebas correctas:", pruebas_ok)
+print("Pruebas con errores:", pruebas_error)
+
+print("\nRevisa los archivos triton_services.log y los backups .gz")
+print("para comprobar la telemetria generada.")
