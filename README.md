@@ -118,6 +118,6 @@ consultar [CONTRIBUTING.md](CONTRIBUTING.md).
 - Integrante 5: [@Martinez, Gustavo](https://www.github.com/)
 - Integrante 6: [@Lescano, Jessica](https://www.github.com/daylagitana89jl-oss)
 
-- ## Video de presentación
+## Video de presentación
 
-- Integrante 1: [Ver video de presentación del Proyecto Tritón en YouTube](https://www.youtube.com/watch?v=tDJbQhEmRpI)
+[Ver video de presentación de Mateo — Proyecto Tritón](https://www.youtube.com/watch?v=tDJbQhEmRpI)
