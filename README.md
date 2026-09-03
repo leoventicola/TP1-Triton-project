@@ -117,3 +117,7 @@ consultar [CONTRIBUTING.md](CONTRIBUTING.md).
 - Integrante 4: [@Venticola, Leandro](https://github.com/leoventicola/)
 - Integrante 5: [@Martinez, Gustavo](https://www.github.com/)
 - Integrante 6: [@Lescano, Jessica](https://www.github.com/daylagitana89jl-oss)
+
+- ## Video de presentación
+
+[Integrante 1: @Cointte, Mateo](https://www.youtube.com/watch?v=tDJbQhEmRpI)
