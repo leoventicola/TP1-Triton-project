@@ -134,7 +134,7 @@ graph TD
 #### Equipo 404
 
 - Integrante 1: [@Cointte, Mateo](https://github.com/Th-30Mateo)
-- Integrante 2: [@Mamaní, Cristian](https://www.github.com/mamanicristian92) (Coordinador)
+- Integrante 2: [@Mamaní, Cristian](https://www.github.com/mamanicristian92)
 - Integrante 3: [@Choque, Ismael](https://www.github.com/ismahack7)
 - Integrante 4: [@Venticola, Leandro](https://github.com/leoventicola/)
 - Integrante 5: [@Martinez, Gustavo](https://www.github.com/)
