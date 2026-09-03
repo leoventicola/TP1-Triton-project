@@ -120,4 +120,4 @@ consultar [CONTRIBUTING.md](CONTRIBUTING.md).
 
 - ## Video de presentación
 
-[Integrante 1: @Cointte, Mateo](https://www.youtube.com/watch?v=tDJbQhEmRpI)
+- Integrante 1: [Ver video de presentación del Proyecto Tritón en YouTube](https://www.youtube.com/watch?v=tDJbQhEmRpI)
