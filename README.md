@@ -129,9 +129,11 @@ graph TD
   M -->|10. Rollover & Gzip| N[production_log.gz]
 ```
 
-# Equipo de desarrollo
+---
 
-#### Equipo 404
+## Equipo de desarrollo
+
+### Equipo 404
 
 - Integrante 1: [@Cointte, Mateo](https://github.com/Th-30Mateo)
 - Integrante 2: [@Mamaní, Cristian](https://www.github.com/mamanicristian92)
@@ -140,6 +142,6 @@ graph TD
 - Integrante 5: [@Martinez, Gustavo](https://www.github.com/)
 - Integrante 6: [@Lescano, Jessica](https://www.github.com/daylagitana89jl-oss)
 
-## Video de presentación
+### Video de presentación
 
-[Ver video de presentación de Mateo — Proyecto Tritón](https://www.youtube.com/watch?v=tDJbQhEmRpI)
+[Link a YouTube](https://www.youtube.com/watch?v=gyBi8WcGG2Y)
