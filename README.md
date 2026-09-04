@@ -135,12 +135,12 @@ graph TD
 
 ### Equipo 404
 
-- Integrante 1: [@Cointte, Mateo](https://github.com/Th-30Mateo)
-- Integrante 2: [@Mamaní, Cristian](https://www.github.com/mamanicristian92)
-- Integrante 3: [@Choque, Ismael](https://www.github.com/ismahack7)
-- Integrante 4: [@Venticola, Leandro](https://github.com/leoventicola/)
-- Integrante 5: [@Martinez, Gustavo](https://www.github.com/)
-- Integrante 6: [@Lescano, Jessica](https://www.github.com/daylagitana89jl-oss)
+- Integrante 1: [Cointte Cedron, Mateo](https://github.com/Th-30Mateo)
+- Integrante 2: [@Mamaní, Cristian Alfredo](https://www.github.com/mamanicristian92)
+- Integrante 3: [@Choque, Ismael Alejandro](https://www.github.com/ismahack7)
+- Integrante 4: [@Venticola, Leandro Enrique](https://github.com/leoventicola/)
+- Integrante 5: [@Martinez, Gustavo Alejandro](https://www.github.com/)
+- Integrante 6: [@Lescano, Jessica Daiana](https://www.github.com/daylagitana89jl-oss)
 
 ### Video de presentación
 
